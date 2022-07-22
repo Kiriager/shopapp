@@ -1,8 +1,13 @@
 package com.challenge.shopapp.domain;
 
+import java.util.Set;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 public class Product {
 
@@ -11,6 +16,11 @@ public class Product {
   private Long id;
   private String title;
   private Double price;
+
+  @ManyToMany
+  @JoinTable(name = "user_product", joinColumns = @JoinColumn(name = "product_id"),
+      inverseJoinColumns = @JoinColumn(name = "product_id"))
+  Set<User> usersWhoBought;
   
   public Product(String title, Double price) {
     this.price = price;
@@ -19,7 +29,6 @@ public class Product {
 
   public Product() {
   }
-
 
   public Long getId() {
     return this.id;
