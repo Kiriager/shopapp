@@ -1,4 +1,4 @@
-package domain;
+package com.challenge.shopapp.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +18,27 @@ public class Product {
   }
 
   public Product() {
+  }
+
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Double getPrice() {
+    return this.price;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   //@ManyToOne
