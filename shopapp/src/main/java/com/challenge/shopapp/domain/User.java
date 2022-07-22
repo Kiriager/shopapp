@@ -1,5 +1,6 @@
 package com.challenge.shopapp.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class User {
   private Double amountOfMoney;
 
   @ManyToMany(mappedBy = "usersWhoBought")
-  Set<Product> boughtProducts;
+  Set<Product> boughtProducts = new HashSet<Product>();
 
   public User(String firstName, String lastrName, Double amountOfMoney) {
     this.firstName = firstName;

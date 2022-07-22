@@ -1,5 +1,6 @@
 package com.challenge.shopapp.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Product {
   @ManyToMany
   @JoinTable(name = "user_product", joinColumns = @JoinColumn(name = "product_id"),
       inverseJoinColumns = @JoinColumn(name = "product_id"))
-  Set<User> usersWhoBought;
+  Set<User> usersWhoBought = new HashSet<User>();
   
   public Product(String title, Double price) {
     this.price = price;

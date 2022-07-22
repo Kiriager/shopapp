@@ -17,7 +17,6 @@ public class BootStrapData implements CommandLineRunner {
     this.productRepository = productRepository;
   }
 
-
   @Override
   public void run(String... args) throws Exception {
     User user1 = new User("Honey", "Badger", 500.0);
@@ -32,6 +31,8 @@ public class BootStrapData implements CommandLineRunner {
     productRepository.save(product1);
     productRepository.save(product2);
 
+    System.out.println(userRepository.count());
+    System.out.println(productRepository.count());
   }
   
 }
