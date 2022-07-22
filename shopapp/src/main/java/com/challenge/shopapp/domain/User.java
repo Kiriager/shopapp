@@ -20,7 +20,7 @@ public class User {
   private Long id;
 
   private String firstName;
-  private String lastrName;
+  private String lastName;
   private Double amountOfMoney;
 
   @ManyToMany(mappedBy = "usersWhoBought")
@@ -28,7 +28,7 @@ public class User {
 
   public User(String firstName, String lastrName, Double amountOfMoney) {
     this.firstName = firstName;
-    this.lastrName = lastrName;
+    this.lastName = lastrName;
     this.amountOfMoney = amountOfMoney;
   }
 
@@ -47,12 +47,12 @@ public class User {
     this.firstName = firstName;
   }
 
-  public String getLastrName() {
-    return this.lastrName;
+  public String getLastName() {
+    return this.lastName;
   }
 
-  public void setLastrName(String lastrName) {
-    this.lastrName = lastrName;
+  public void setLastName(String lastrName) {
+    this.lastName = lastrName;
   }
 
   public Double getAmountOfMoney() {
@@ -94,7 +94,7 @@ public class User {
     return "{" +
         " id='" + getId() + "'" +
         ", firstName='" + getFirstName() + "'" +
-        ", lastrName='" + getLastrName() + "'" +
+        ", lastName='" + getLastName() + "'" +
         ", amountOfMoney='" + getAmountOfMoney() + "'" +
         "}";
   }
