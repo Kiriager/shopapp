@@ -50,7 +50,12 @@ public class Product {
     this.price = price;
   }
 
-  //@ManyToOne
-  //private Location location;
+  public Set<User> getUsersWhoBought() {
+    return usersWhoBought;
+  }
+  
+  public void setUsersWhoBought(Set<User> usersWhoBought) {
+    this.usersWhoBought = usersWhoBought;
+  }
 
 }

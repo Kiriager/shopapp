@@ -56,4 +56,11 @@ public class User {
     this.amountOfMoney = amountOfMoney;
   }
 
+  public Set<Product> getBoughtProducts() {
+    return boughtProducts;
+  }
+
+  public void setBoughtProducts(Set<Product> boughtProducts) {
+    this.boughtProducts = boughtProducts;
+  }
 }
