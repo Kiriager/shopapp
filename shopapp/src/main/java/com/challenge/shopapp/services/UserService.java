@@ -8,9 +8,12 @@ public interface UserService {
   Set<User> findAll();
 
   User create(String firstName, String lastName, Double amountOfMoney);
-  //Post update(Long id, User author, String title, String body);
+  
+  //User update(User user);
   
   void delete(Long id);
   
   User find(Long id);
+
+  User buyProduct(Long userId, Long productId);
 }

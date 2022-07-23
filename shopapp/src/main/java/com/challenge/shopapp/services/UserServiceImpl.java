@@ -6,7 +6,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.challenge.shopapp.domain.Product;
 import com.challenge.shopapp.domain.User;
+import com.challenge.shopapp.exceptions.NotEnoughMoney;
 import com.challenge.shopapp.exceptions.UserNotFoundException;
 import com.challenge.shopapp.repositories.UserRepository;
 
@@ -14,10 +16,12 @@ import com.challenge.shopapp.repositories.UserRepository;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
+  private final ProductService productService;
 
   @Autowired
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(UserRepository userRepository, ProductService productService) {
     this.userRepository = userRepository;
+    this.productService = productService;
   }
 
   @Override
@@ -49,6 +53,19 @@ public class UserServiceImpl implements UserService {
   @Override
   public User find(Long id) {
     return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+  }
+
+  @Override
+  public User buyProduct(Long userId, Long productId) {
+    if (find(userId).getAmountOfMoney() < productService.find(productId).getPrice()) {
+      throw new NotEnoughMoney(userId, productId);
+    } else {
+      Product product = productService.addUserWhoBought(productId, find(userId));
+      User user = find(userId);
+      user.setAmountOfMoney(user.getAmountOfMoney() - product.getPrice());
+      user.getBoughtProducts().add(product);
+      return userRepository.save(user);
+    }
   }
   
 }

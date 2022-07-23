@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -54,6 +57,14 @@ public class UserController {
     User newUser = userService.create(dto.getFirstName(), 
         dto.getLastName(), dto.getAmountOfMoney());
     return userMapper.toDto(newUser);
+  }
+
+  @PutMapping("/users/{userId}/buy-product")
+  public UserDto buyProduct(@PathVariable("id") Long userId, 
+      @NotNull(message = "Product id is mandatory") 
+      @RequestParam("productId") Long productId) {
+    User updatedUser = userService.buyProduct(userId, productId);
+    return userMapper.toDto(updatedUser);
   }
 
   @DeleteMapping(value = "/user/{id}")

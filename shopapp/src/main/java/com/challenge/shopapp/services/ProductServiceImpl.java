@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.challenge.shopapp.domain.Product;
+import com.challenge.shopapp.domain.User;
 import com.challenge.shopapp.exceptions.ProductNotFoundException;
 import com.challenge.shopapp.repositories.ProductRepository;
 
@@ -51,5 +52,14 @@ public class ProductServiceImpl implements ProductService {
     Product entity = find(id);
     productRepository.delete(entity);    
   }
+
+  @Override
+  public Product addUserWhoBought(Long productId, User user) {
+    Product product = find(productId);
+    product.getUsersWhoBought().add(user);
+    return productRepository.save(product);   
+  }
+
+ 
   
 }
