@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 public class CreateProductDto {
   @NotBlank(message = "Product title is mandatory")
-  @Size(min = 2, max = 50, message = "Product title must be 2-50 charecters long")
+  @Size(min = 2, max = 50, message = "Product title must be 2-50 characters long")
   private String title;
 
   @NotNull(message = "Product price is mandatory")

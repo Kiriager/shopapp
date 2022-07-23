@@ -45,5 +45,11 @@ public class ProductServiceImpl implements ProductService {
     entity.setPrice(price);
     return productRepository.save(entity);
   }
+
+  @Override
+  public void delete(Long id) {
+    Product entity = find(id);
+    productRepository.delete(entity);    
+  }
   
 }

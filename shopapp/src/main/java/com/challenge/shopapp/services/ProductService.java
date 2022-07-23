@@ -10,7 +10,7 @@ public interface ProductService {
   Product create(String title, Double price);
   //Post update(Long id, User author, String title, String body);
   
-  //void delete(Long id, User author);
+  void delete(Long id);
   
   Product find(Long id);
   
