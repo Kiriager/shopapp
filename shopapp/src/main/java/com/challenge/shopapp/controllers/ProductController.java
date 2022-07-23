@@ -31,17 +31,14 @@ public class ProductController {
   }
 
   @GetMapping(value = "/products")
-  public Set<ProductDto> getproducts() {
+  public Set<ProductDto> getProducts() {
     return productMapper.toDto(productService.findAll());
   }
-/* 
+
   @GetMapping(value = "/products/{id}")
-  public ResponseEntity<ProductDto> getEvent(@PathVariable("id") Long id) {
-    Optional<Product> entity = productRepository.findById(id);
-    if (!entity.isPresent()) {
-      return ResponseEntity.notFound().build();
-    }
-    return new ResponseEntity<>(productMapper.toDto(entity.get()), HttpStatus.OK);
+  public ProductDto getProduct(@PathVariable("id") Long id) {
+    Product product = productService.find(id);
+    return productMapper.toDto(product);
   }
-  */
+  
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.challenge.shopapp.domain.Product;
+import com.challenge.shopapp.exceptions.ProductNotFoundException;
 import com.challenge.shopapp.repositories.ProductRepository;
 
 @Service
@@ -29,6 +30,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     return result;
+  }
+
+  @Override
+  public Product find(Long id) {
+    return productRepository.findById(id)
+        .orElseThrow(() -> new ProductNotFoundException(id));
   }
   
 }
