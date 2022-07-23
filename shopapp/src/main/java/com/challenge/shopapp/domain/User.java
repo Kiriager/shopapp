@@ -88,7 +88,6 @@ public class User {
     return Objects.hash(id);
   }
 
-
   @Override
   public String toString() {
     return "{" +
@@ -98,6 +97,5 @@ public class User {
         ", amountOfMoney='" + getAmountOfMoney() + "'" +
         "}";
   }
-
 
 }

@@ -64,7 +64,6 @@ public class Product {
     this.usersWhoBought = usersWhoBought;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (o == this) {
