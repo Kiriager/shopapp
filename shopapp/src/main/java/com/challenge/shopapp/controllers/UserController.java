@@ -50,7 +50,7 @@ public class UserController {
   }
   
   @PostMapping("/users")
-  public UserDto addProduct(@Valid @RequestBody CreateUserDto dto) {
+  public UserDto addUser(@Valid @RequestBody CreateUserDto dto) {
     User newUser = userService.create(dto.getFirstName(), 
         dto.getLastName(), dto.getAmountOfMoney());
     return userMapper.toDto(newUser);

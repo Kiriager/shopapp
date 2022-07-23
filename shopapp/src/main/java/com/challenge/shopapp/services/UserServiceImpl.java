@@ -34,8 +34,10 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User create(String firstName, String lastName, Double amountOfMoney) {
-    // TODO Auto-generated method stub
-    return null;
+    User entity = new User();
+    entity.setFirstName(firstName);
+    entity.setLastName(lastName);
+    return userRepository.save(entity);
   }
 
   @Override
