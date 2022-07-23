@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.challenge.shopapp.domain.Product;
 import com.challenge.shopapp.domain.User;
+import com.challenge.shopapp.dto.CreateProductDto;
 import com.challenge.shopapp.dto.ProductDto;
 
 public class ProductMapperImpl implements ProductMapper {
@@ -35,6 +36,20 @@ public class ProductMapperImpl implements ProductMapper {
       dto.add(this.toDto(product));
     }
     return dto;
+  }
+
+  @Override
+  public Product toSrc(CreateProductDto dto) {
+    if (dto == null) {
+      return null;
+    }
+
+    Product src = new Product();
+
+    src.setTitle(dto.getTitle());
+    src.setPrice(dto.getPrice());
+ 
+    return src;
   }
   
 }

@@ -37,5 +37,13 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.findById(id)
         .orElseThrow(() -> new ProductNotFoundException(id));
   }
+
+  @Override
+  public Product create(String title, Double price) {
+    Product entity = new Product();
+    entity.setTitle(title);
+    entity.setPrice(price);
+    return productRepository.save(entity);
+  }
   
 }

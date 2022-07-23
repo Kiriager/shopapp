@@ -1,18 +1,17 @@
 package com.challenge.shopapp.controllers;
 
-import java.util.HashSet;
-import java.util.Optional;
+import javax.validation.Valid;
+
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.shopapp.domain.Product;
+import com.challenge.shopapp.dto.CreateProductDto;
 import com.challenge.shopapp.dto.ProductDto;
 import com.challenge.shopapp.mappers.ProductMapper;
 import com.challenge.shopapp.mappers.ProductMapperImpl;
@@ -25,7 +24,6 @@ public class ProductController {
   private final ProductService productService;
   private final ProductMapper productMapper = new ProductMapperImpl();
 
-  @Autowired
   public ProductController(ProductService productService) {
     this.productService = productService;
   }
@@ -39,6 +37,12 @@ public class ProductController {
   public ProductDto getProduct(@PathVariable("id") Long id) {
     Product product = productService.find(id);
     return productMapper.toDto(product);
+  }
+
+  @PostMapping("/products")
+  public ProductDto addProduct(@Valid @RequestBody CreateProductDto dto) {
+    Product newProduct = productService.create(dto.getTitle(), dto.getPrice());
+    return productMapper.toDto(newProduct);
   }
   
 }
