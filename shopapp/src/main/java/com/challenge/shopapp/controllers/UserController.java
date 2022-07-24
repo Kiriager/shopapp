@@ -27,7 +27,7 @@ import com.challenge.shopapp.dto.CreateUserDto;
 import com.challenge.shopapp.dto.UserDto;
 import com.challenge.shopapp.mappers.UserMapper;
 import com.challenge.shopapp.mappers.UserMapperImpl;
-import com.challenge.shopapp.services.ProductService;
+
 import com.challenge.shopapp.services.UserService;
 
 @RestController
@@ -54,7 +54,6 @@ public class UserController {
   
   @PostMapping("/users")
   public UserDto addUser(@Valid @RequestBody CreateUserDto dto) {
-    System.out.println(dto.toString());
     User newUser = userService.create(dto.getFirstName(), 
         dto.getLastName(), dto.getAmountOfMoney());
     return userMapper.toDto(newUser);

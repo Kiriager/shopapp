@@ -8,8 +8,9 @@ import com.challenge.shopapp.domain.User;
 public interface ProductService {
   Set<Product> findAll();
 
+  Set<Product> findBoughtByUser(Long id);
+
   Product create(String title, Double price);
-  //Post update(Long id, User author, String title, String body);
   
   Product addUserWhoBought(Long productId, User user);
 

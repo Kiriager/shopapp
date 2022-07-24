@@ -1,6 +1,7 @@
 package com.challenge.shopapp.controllers;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -49,6 +51,12 @@ public class ProductController {
   public ProductDto getProduct(@PathVariable("id") Long id) {
     Product product = productService.find(id);
     return productMapper.toDto(product);
+  }
+
+  @GetMapping(value = "/products/bought-by")
+  public Set<ProductDto> getProductBoughtByUser(
+      @NotNull(message = "User id is mandatory") @RequestParam("userId") Long userId) {
+    return productMapper.toDto(productService.findBoughtByUser(userId));
   }
 
   @PostMapping("/products")

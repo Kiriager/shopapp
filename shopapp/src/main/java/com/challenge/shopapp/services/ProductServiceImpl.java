@@ -60,6 +60,25 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.save(product);   
   }
 
- 
-  
+  @Override
+  public Set<Product> findBoughtByUser(Long id) {
+    Set<Product> result = new HashSet<Product>();
+
+    for (Product product : findAll()) {
+      if (isBoughtByUser(product, id)){
+        result.add(product);
+      }
+    }
+
+    return result;
+  }
+
+  private boolean isBoughtByUser(Product product, Long userId) {
+    for (User user : product.getUsersWhoBought()) {
+      if (user.getId() == userId) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
