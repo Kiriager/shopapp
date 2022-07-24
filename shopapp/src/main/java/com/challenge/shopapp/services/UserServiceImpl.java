@@ -68,5 +68,11 @@ public class UserServiceImpl implements UserService {
       return userRepository.save(user);
     }
   }
+
+  @Override
+  public Set<User> findBuyersOfProduct(Long productId) {
+    Product product = productService.find(productId);
+    return product.getUsersWhoBought();
+  }
   
 }

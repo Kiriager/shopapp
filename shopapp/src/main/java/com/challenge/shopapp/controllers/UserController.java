@@ -51,6 +51,12 @@ public class UserController {
     User user = userService.find(id);
     return userMapper.toDto(user);
   }
+
+  @GetMapping(value = "/users/buyers-of")
+  public Set<UserDto> getBuyersOfProduct(
+      @NotNull(message = "Product id is mandatory") @RequestParam("productId") Long productId) {
+    return userMapper.toDto(userService.findBuyersOfProduct(productId));
+  }
   
   @PostMapping("/users")
   public UserDto addUser(@Valid @RequestBody CreateUserDto dto) {
