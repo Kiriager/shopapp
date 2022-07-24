@@ -7,14 +7,14 @@ import javax.validation.constraints.Size;
 
 public class CreateUserDto {
   @NotBlank(message = "First name is mandatory")
-  @Size(min = 2, max = 50, message = "First must be 2-50 characters long")
+  @Size(min = 2, max = 50, message = "First name must be 2-50 characters long")
   private String firstName;
 
   @NotBlank(message = "Last name is mandatory")
-  @Size(min = 2, max = 50, message = "Last must be 2-50 characters long")
+  @Size(min = 2, max = 50, message = "Last namr must be 2-50 characters long")
   private String lastName;
 
-  @NotNull(message = "User amount of money is mandatory")
+  @NotNull(message = "User mount of money is mandatory")
   @DecimalMin(value = "0.0", message = "Amount of money should be positive number")
   private Double amountOfMoney;
 
@@ -51,6 +51,16 @@ public class CreateUserDto {
 
   public void setAmountOfMoney(Double amountOfMoney) {
     this.amountOfMoney = amountOfMoney;
+  }
+
+
+  @Override
+  public String toString() {
+    return "{" +
+      " firstName='" + getFirstName() + "'" +
+      ", lastName='" + getLastName() + "'" +
+      ", amountOfMoney='" + getAmountOfMoney() + "'" +
+      "}";
   }
 
 }

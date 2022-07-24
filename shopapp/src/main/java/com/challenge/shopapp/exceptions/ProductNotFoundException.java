@@ -1,12 +1,16 @@
 package com.challenge.shopapp.exceptions;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import org.springframework.http.HttpStatus;
+public class ProductNotFoundException extends RuntimeException{
+  String message;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ProductNotFoundException extends RuntimeException {
   public ProductNotFoundException(Long id) {
-    super("Could not find product with Id = " + id);
+    super("Product Id = " + id + " doesn't exist");
+    message = "Product Id = " + id + " doesn't exist";
+  }
+
+  @Override
+  public String getMessage() {
+    return message;
   }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.challenge.shopapp.domain.Product;
 import com.challenge.shopapp.domain.User;
+import com.challenge.shopapp.dto.CreateUserDto;
 import com.challenge.shopapp.dto.UserDto;
 
 public class UserMapperImpl implements UserMapper {
@@ -36,6 +37,21 @@ public class UserMapperImpl implements UserMapper {
       dto.add(this.toDto(user));
     }
     return dto;
+  }
+
+  @Override
+  public User toSrc(CreateUserDto dto) {
+    if (dto == null) {
+      return null;
+    }
+
+    User src = new User();
+
+    src.setFirstName(dto.getFirstName());
+    src.setLastName(dto.getLastName());
+    src.setAmountOfMoney(dto.getAmountOfMoney());
+    
+    return src;
   }
   
 }

@@ -42,7 +42,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/users")
-  public Set<UserDto> getAllProducts() {
+  public Set<UserDto> getAllUsers() {
     return userMapper.toDto(userService.findAll());
   }
 
@@ -54,20 +54,21 @@ public class UserController {
   
   @PostMapping("/users")
   public UserDto addUser(@Valid @RequestBody CreateUserDto dto) {
+    System.out.println(dto.toString());
     User newUser = userService.create(dto.getFirstName(), 
         dto.getLastName(), dto.getAmountOfMoney());
     return userMapper.toDto(newUser);
   }
 
   @PutMapping("/users/{userId}/buy-product")
-  public UserDto buyProduct(@PathVariable("id") Long userId, 
+  public UserDto buyProduct(@PathVariable("userId") Long userId, 
       @NotNull(message = "Product id is mandatory") 
       @RequestParam("productId") Long productId) {
     User updatedUser = userService.buyProduct(userId, productId);
     return userMapper.toDto(updatedUser);
   }
 
-  @DeleteMapping(value = "/user/{id}")
+  @DeleteMapping(value = "/users/{id}")
   public void removeUser(@PathVariable("id") Long id) {
     userService.delete(id);
   }
@@ -83,4 +84,5 @@ public class UserController {
     });
     return errors;
   }
+
 }

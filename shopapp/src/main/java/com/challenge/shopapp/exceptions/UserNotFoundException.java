@@ -1,13 +1,17 @@
 package com.challenge.shopapp.exceptions;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import org.springframework.http.HttpStatus;
-
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
+  
+  String message;
+
   public UserNotFoundException(Long id) {
-    super("Could not find user with Id = " + id);
+    super("User with Id = " + id + "doesn't exist");
+    message = "User Id = " + id + " doesn't exist";
+  }
+
+  @Override
+  public String getMessage() {
+    return message;
   }
 }
 

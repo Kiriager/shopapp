@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.challenge.shopapp.domain.Product;
 import com.challenge.shopapp.domain.User;
-import com.challenge.shopapp.exceptions.NotEnoughMoney;
+import com.challenge.shopapp.exceptions.NotEnoughMoneyException;
 import com.challenge.shopapp.exceptions.UserNotFoundException;
 import com.challenge.shopapp.repositories.UserRepository;
 
@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     User entity = new User();
     entity.setFirstName(firstName);
     entity.setLastName(lastName);
+    entity.setAmountOfMoney(amountOfMoney);
     return userRepository.save(entity);
   }
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public User buyProduct(Long userId, Long productId) {
     if (find(userId).getAmountOfMoney() < productService.find(productId).getPrice()) {
-      throw new NotEnoughMoney(userId, productId);
+      throw new NotEnoughMoneyException(userId, productId);
     } else {
       Product product = productService.addUserWhoBought(productId, find(userId));
       User user = find(userId);

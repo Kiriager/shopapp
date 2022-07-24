@@ -5,6 +5,7 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 
 import com.challenge.shopapp.domain.User;
+import com.challenge.shopapp.dto.CreateUserDto;
 import com.challenge.shopapp.dto.UserDto;
 
 @Mapper
@@ -13,5 +14,5 @@ public interface UserMapper {
   
   Set<UserDto> toDto(Iterable<User> src);
 
-  //User toSrc(CreateUserDto dto);
+  User toSrc(CreateUserDto dto);
 }
